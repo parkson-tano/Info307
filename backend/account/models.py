@@ -16,7 +16,7 @@ class User(AbstractUser):
     date_created = models.DateTimeField(auto_now_add=True)
     
     USERNAME_FIELD = 'phone_number'
-    REQUIRED_FIELDS = ['first_name', 'last_name']
+    REQUIRED_FIELDS = ['first_name', 'last_name', 'username']
     
     def __str__(self):
         return "{}".format(self.phone_number)
