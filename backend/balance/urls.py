@@ -9,4 +9,6 @@ urlpatterns = [
     path("withdraw/<int:pk>", WithdrawViewAPI.as_view()),
     path("airtime", AirtimeCreateViewAPI.as_view()),
     path("airtime/<int:pk>/", AirtimeViewAPI.as_view()),
+    path("transfer", TransferCreateViewAPI.as_view()),
+    path("transfer/<int:pk>/", TransferViewAPI.as_view()),
 ]

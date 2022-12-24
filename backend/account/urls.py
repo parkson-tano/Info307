@@ -1,4 +1,4 @@
-from django.urls import path
+from django.urls import path, include
 from .views import *
 from rest_framework_simplejwt.views import TokenRefreshView
 from rest_framework_simplejwt.views import (
@@ -10,7 +10,6 @@ urlpatterns = [
     path("<int:pk>", UserApiView.as_view(), name='user_api'),
     path("mtn-account/<int:pk>", MtnAccountViewAPI.as_view()),
     path("agent-account/<int:pk>", AgentAccountViewAPI.as_view()),
-
     path("mtn-account", MtnAccountView.as_view()),
     path("agent-account", AgentAccountView.as_view()),
 
