@@ -29,7 +29,8 @@ class UserSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
         fields = ('id', 'password', 'phone_number',
-                  'first_name', 'last_name', 'date_created')
+                  'first_name', 'last_name','momo_agent', 'id_num', 'date_of_birth',
+                  'place_of_birth', 'address', 'front_pic', 'rear_pic', 'date_created', )
 
 
 class RegisterSerializer(serializers.ModelSerializer):
