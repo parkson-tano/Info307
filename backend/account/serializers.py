@@ -30,7 +30,7 @@ class UserSerializer(serializers.ModelSerializer):
         model = User
         fields = ('id', 'password', 'phone_number',
                   'first_name', 'last_name','momo_agent', 'id_num', 'date_of_birth',
-                  'place_of_birth', 'address', 'front_pic', 'rear_pic', 'date_created', )
+                  'place_of_birth', 'address', 'front_pic', 'rear_pic', 'verified', 'date_created', )
 
 
 class RegisterSerializer(serializers.ModelSerializer):
@@ -46,7 +46,8 @@ class RegisterSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
         fields = ('password', 'first_name',
-                  'last_name', 'phone_number')
+                  'last_name', 'phone_number', 'id_num', 'date_of_birth',
+                  'place_of_birth', 'address', 'front_pic', 'rear_pic', 'verified',)
         extra_kwargs = {
             'first_name': {'required': False},
             'last_name': {'required': False}
@@ -63,6 +64,15 @@ class RegisterSerializer(serializers.ModelSerializer):
             first_name=validated_data['first_name'],
             last_name=validated_data['last_name'],
             phone_number=validated_data['phone_number'],
+            id_num = validated_data['id_num'],
+            date_of_birth = validated_data['date_of_birth'],
+            place_of_birth  = validated_data['place_of_birth'],
+            address  = validated_data['address'],
+            front_pic  = validated_data['front_pic'],
+            rear_pic  = validated_data['rear_pic'],
+            verified  = validated_data['verified']
+            
+            
         )
 
         user.set_password(validated_data['password'])
