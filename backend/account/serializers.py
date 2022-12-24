@@ -28,7 +28,7 @@ class MyTokenObtainPairSerializer(TokenObtainPairSerializer):
 class UserSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
-        fields = ('id', 'password', 'phone_number', 'date_created', )
+        fields = ('id', 'password', 'phone_number','momo_account', 'date_created', )
 
 
 class RegisterSerializer(serializers.ModelSerializer):
