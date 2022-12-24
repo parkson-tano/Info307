@@ -2,7 +2,7 @@ from django.shortcuts import render
 from .models import *
 from .serializers import *
 from rest_framework import generics
-from account.models import AccountBalance, Verification
+from account.models import AccountBalance
 # Create your views here.
 
 class AccountBalanceCreateViewAPI(generics.ListCreateAPIView):
@@ -14,15 +14,6 @@ class AccountBalanceViewAPI(generics.RetrieveUpdateDestroyAPIView):
     queryset = AccountBalance.objects.all()
     serializer_class = AccountBalanceSerializer
 
-
-class VerificationCreateViewAPI(generics.ListCreateAPIView):
-    queryset = Verification.objects.all()
-    serializer_class = VerificationSerializer
-
-
-class VerificationViewAPI(generics.RetrieveUpdateDestroyAPIView):
-    queryset = Verification.objects.all()
-    serializer_class = VerificationSerializer
 
 class DepositCreateViewAPI(generics.ListCreateAPIView):
     queryset = Deposit.objects.all()

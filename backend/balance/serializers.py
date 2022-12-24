@@ -1,16 +1,11 @@
 from rest_framework import serializers
 from .models import *
-from account.models import AccountBalance, Verification
+from account.models import AccountBalance
 class AccountBalanceSerializer(serializers.ModelSerializer):
     class Meta:
         model = AccountBalance
         fields = "__all__"
 
-
-class VerificationSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = Verification
-        fields = "__all__"
 
 
 class DepositSerializer(serializers.ModelSerializer):
