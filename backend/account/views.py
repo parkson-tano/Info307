@@ -34,6 +34,34 @@ class RegisterView(generics.CreateAPIView):
     serializer_class = RegisterSerializer
 
 
+class MtnAccountCreateViewAPI(generics.CreateAPIView):
+    queryset = MtnAccount.objects.all()
+    serializer_class = MtnAccountSerializer
+
+
+class MtnAccountViewAPI(generics.RetrieveUpdateDestroyAPIView):
+    queryset = MtnAccount.objects.all()
+    serializer_class = MtnAccountSerializer
+
+
+class AgentAccountCreateViewAPI(generics.CreateAPIView):
+    queryset = AgentAccount.objects.all()
+    serializer_class = AgentAccountSerializer
+
+
+class MtnAccountView(generics.ListAPIView):
+    queryset = MtnAccount.objects.all()
+    serializer_class = MtnAccountSerializer
+
+
+class AgentAccountView(generics.ListAPIView):
+    queryset = AgentAccount.objects.all()
+    serializer_class = AgentAccountSerializer
+
+class AgentAccountViewAPI(generics.RetrieveUpdateDestroyAPIView):
+    queryset = AgentAccount.objects.all()
+    serializer_class =AgentAccountSerializer
+
 class LogoutAndBlacklistRefreshToken(APIView):
     permission_classes = (permissions.AllowAny,)
     authentication_classes = ()

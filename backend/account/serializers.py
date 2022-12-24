@@ -3,7 +3,7 @@ from rest_framework import serializers
 from django.contrib.auth.models import User
 from rest_framework.validators import UniqueValidator
 from django.contrib.auth.password_validation import validate_password
-
+from .models import AgentAccount, MtnAccount
 from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
 from django.contrib.auth import get_user_model
 User = get_user_model()
@@ -28,9 +28,7 @@ class MyTokenObtainPairSerializer(TokenObtainPairSerializer):
 class UserSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
-        fields = ('id', 'password', 'phone_number',
-                  'first_name', 'last_name','momo_agent', 'id_num', 'date_of_birth',
-                  'place_of_birth', 'address', 'front_pic', 'rear_pic', 'verified', 'date_created', )
+        fields = ('id', 'password', 'phone_number', 'date_created', )
 
 
 class RegisterSerializer(serializers.ModelSerializer):
@@ -45,9 +43,7 @@ class RegisterSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = User
-        fields = ('password', 'first_name',
-                  'last_name', 'phone_number', 'id_num', 'date_of_birth',
-                  'place_of_birth', 'address', 'front_pic', 'rear_pic', 'verified',)
+        fields = ('password', 'phone_number','mtn_account' )
         extra_kwargs = {
             'first_name': {'required': False},
             'last_name': {'required': False}
@@ -61,18 +57,7 @@ class RegisterSerializer(serializers.ModelSerializer):
 
     def create(self, validated_data):
         user = User.objects.create(
-            first_name=validated_data['first_name'],
-            last_name=validated_data['last_name'],
-            phone_number=validated_data['phone_number'],
-            id_num = validated_data['id_num'],
-            date_of_birth = validated_data['date_of_birth'],
-            place_of_birth  = validated_data['place_of_birth'],
-            address  = validated_data['address'],
-            front_pic  = validated_data['front_pic'],
-            rear_pic  = validated_data['rear_pic'],
-            verified  = validated_data['verified']
-            
-            
+            phone_number=validated_data['phone_number'],       
         )
 
         user.set_password(validated_data['password'])
@@ -80,3 +65,12 @@ class RegisterSerializer(serializers.ModelSerializer):
 
         return user
 
+class MtnAccountSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = MtnAccount
+        fields = "__all__"
+
+class AgentAccountSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = AgentAccount
+        fields = "__all__"
