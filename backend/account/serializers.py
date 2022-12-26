@@ -39,7 +39,6 @@ class RegisterSerializer(serializers.ModelSerializer):
 
     password = serializers.CharField(
         write_only=True, required=True, validators=[validate_password])
-    # password2 = serializers.CharField(write_only=True, required=True)
 
     class Meta:
         model = User
@@ -49,11 +48,13 @@ class RegisterSerializer(serializers.ModelSerializer):
             'last_name': {'required': False}
         }
 
-    # def validate(self, attrs):
-    #     if attrs['password'] != attrs['password2']:
-    #         raise serializers.ValidationError({"password": "Password fields didn't match."})
-
-    #     return attrs
+    def validate(self, attrs):
+        if len(attrs['password']) != 5 and type(attrs['password']) != 'int':
+            raise serializers.ValidationError({"password": "Password fields error."})
+        if len(attrs['phone_number']) != 9:
+            raise serializers.ValidationError(
+                {"phone_number": "Check Number"})
+        return attrs
 
     def create(self, validated_data):
         user = User.objects.create(
@@ -75,3 +76,12 @@ class AgentAccountSerializer(serializers.ModelSerializer):
         model = AgentAccount
         fields = "__all__"
 
+
+class ChangePasswordSerializer(serializers.Serializer):
+    model = User
+
+    """
+    Serializer for password change endpoint.
+    """
+    old_password = serializers.CharField(required=True)
+    new_password = serializers.CharField(required=True)

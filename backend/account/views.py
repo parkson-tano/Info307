@@ -11,6 +11,7 @@ from rest_framework_simplejwt.views import TokenObtainPairView
 from rest_framework import status, permissions
 from rest_framework.permissions import IsAuthenticated
 from rest_framework import status
+from rest_framework import viewsets
 # from django.contrib.auth import get_user_model
 # User = get_user_model()
 
@@ -20,48 +21,24 @@ class MyObtainTokenPairView(TokenObtainPairView):
     serializer_class = MyTokenObtainPairSerializer
 
 
-class UserCreateViewAPI(generics.ListAPIView):
+class UserViewAPI(viewsets.ModelViewSet):
     queryset = User.objects.all()
     serializer_class = UserSerializer
 
 
-class UserApiView(generics.RetrieveUpdateDestroyAPIView):
-    queryset = User.objects.all()
-    serializer_class = UserSerializer
-
-
-class RegisterView(generics.CreateAPIView):
+class RegisterView(viewsets.ModelViewSet):
     queryset = User.objects.all()
     serializer_class = RegisterSerializer
 
 
-class MtnAccountCreateViewAPI(generics.CreateAPIView):
+class MtnAccountViewAPI(viewsets.ModelViewSet):
     queryset = MtnAccount.objects.all()
     serializer_class = MtnAccountSerializer
 
 
-class MtnAccountViewAPI(generics.RetrieveUpdateDestroyAPIView):
-    queryset = MtnAccount.objects.all()
-    serializer_class = MtnAccountSerializer
-
-
-class AgentAccountCreateViewAPI(generics.CreateAPIView):
+class AgentAccountViewAPI(viewsets.ModelViewSet):
     queryset = AgentAccount.objects.all()
     serializer_class = AgentAccountSerializer
-
-
-class MtnAccountView(generics.ListAPIView):
-    queryset = MtnAccount.objects.all()
-    serializer_class = MtnAccountSerializer
-
-
-class AgentAccountView(generics.ListAPIView):
-    queryset = AgentAccount.objects.all()
-    serializer_class = AgentAccountSerializer
-
-class AgentAccountViewAPI(generics.RetrieveUpdateDestroyAPIView):
-    queryset = AgentAccount.objects.all()
-    serializer_class =AgentAccountSerializer
 
 class LogoutAndBlacklistRefreshToken(APIView):
     permission_classes = (permissions.AllowAny,)
@@ -75,3 +52,31 @@ class LogoutAndBlacklistRefreshToken(APIView):
             return Response(status=status.HTTP_205_RESET_CONTENT)
         except Exception as e:
             return Response(status=status.HTTP_400_BAD_REQUEST)
+
+
+class ChangePasswordView(generics.UpdateAPIView):
+    serializer_class = ChangePasswordSerializer
+    model = User
+
+    def get_object(self, queryset=None):
+        id = self.kwargs['number']
+        obj = User.objects.get(phone_number = id)
+        return obj
+
+    def update(self, request, *args, **kwargs):
+        self.object = self.get_object()
+        serializer = self.get_serializer(data=request.data)
+        if serializer.is_valid():
+            if not self.object.check_password(serializer.data.get("old_password")):
+                return Response({"old_password": ["Wrong password."]}, status=status.HTTP_400_BAD_REQUEST)
+            self.object.set_password(serializer.data.get("new_password"))
+            self.object.save()
+            response = {
+                    'status': 'success',
+                    'code': status.HTTP_200_OK,
+                    'message': 'Password updated successfully',
+                    'data': []
+                }
+
+            return Response(response)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
