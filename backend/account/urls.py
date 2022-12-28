@@ -6,7 +6,7 @@ from rest_framework_simplejwt.views import (
     TokenRefreshView,
 )
 urlpatterns = [
-    path("", UserViewAPI.as_view({'get': 'list'}), name='user_create'),
+    path("", GetUserViewAPI.as_view({'get': 'list'}), name='user_create'),
     path("<int:pk>", UserViewAPI.as_view({'get': 'retrieve', 'put': 'update',
                                           'patch': 'partial_update',
                                           'delete': 'destroy'}), name='user_api'),
@@ -19,7 +19,7 @@ urlpatterns = [
                                       'delete': 'destroy'})),
     path("mtn-account", MtnAccountViewAPI.as_view({'get': 'list'})),
     path("agent-account",
-         AgentAccountViewAPI.as_view({'get': 'list'})),
+         GetAgentAccountViewAPI.as_view({'get': 'list'})),
 
     path('register/',
          RegisterView.as_view({'post':'create'}), name='auth_register'),

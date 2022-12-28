@@ -24,7 +24,7 @@ class MtnAccount(models.Model):
     verified = models.BooleanField(default=False)
     date_created = models.DateTimeField(auto_now_add=True)
     def __str__(self):
-        return self.first_name
+        return str(self.id)
 
 class User(AbstractUser):
     username = models.CharField(max_length=50, blank=True, null=True, unique=False, default="")
@@ -49,7 +49,7 @@ class AgentAccount(models.Model):
     date_created = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
-        return self.agent_name
+        return str(self.id)
 
 class AccountBalance(models.Model):
     user = models.OneToOneField(

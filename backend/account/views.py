@@ -26,6 +26,10 @@ class UserViewAPI(viewsets.ModelViewSet):
     serializer_class = UserSerializer
 
 
+class GetUserViewAPI(viewsets.ModelViewSet):
+    queryset = User.objects.all()
+    serializer_class = GetUserSerializer
+
 class RegisterView(viewsets.ModelViewSet):
     queryset = User.objects.all()
     serializer_class = RegisterSerializer
@@ -39,6 +43,11 @@ class MtnAccountViewAPI(viewsets.ModelViewSet):
 class AgentAccountViewAPI(viewsets.ModelViewSet):
     queryset = AgentAccount.objects.all()
     serializer_class = AgentAccountSerializer
+
+
+class GetAgentAccountViewAPI(viewsets.ModelViewSet):
+    queryset = AgentAccount.objects.all()
+    serializer_class = GetAgentAccountSerializer
 
 class LogoutAndBlacklistRefreshToken(APIView):
     permission_classes = (permissions.AllowAny,)

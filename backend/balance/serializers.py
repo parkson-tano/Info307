@@ -1,7 +1,9 @@
 from rest_framework import serializers
 from .models import *
 from account.models import AccountBalance
+from account.serializers import UserSerializer
 class AccountBalanceSerializer(serializers.ModelSerializer):
+    user = UserSerializer(many=True, read_only=True)
     class Meta:
         model = AccountBalance
         fields = "__all__"

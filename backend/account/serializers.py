@@ -23,13 +23,25 @@ class MyTokenObtainPairSerializer(TokenObtainPairSerializer):
 #     class Meta:
 #         model = UserProfile
 #         fields = "__all__"
+class MtnAccountSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = MtnAccount
+        fields = "__all__"
 
 
-class UserSerializer(serializers.ModelSerializer):
+class GetUserSerializer(serializers.ModelSerializer):
+    mtn_account = MtnAccountSerializer(read_only=True)
     class Meta:
         model = User
         fields = ('id', 'password', 'phone_number','mtn_account', 'date_created', )
 
+
+class UserSerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = User
+        fields = ('id', 'password', 'phone_number',
+                  'mtn_account', 'date_created', )
 
 class RegisterSerializer(serializers.ModelSerializer):
     phone_number = serializers.CharField(
@@ -58,7 +70,8 @@ class RegisterSerializer(serializers.ModelSerializer):
 
     def create(self, validated_data):
         user = User.objects.create(
-            phone_number=validated_data['phone_number'],       
+            phone_number=validated_data['phone_number'],   
+            mtn_account = validated_data['mtn_account'],    
         )
 
         user.set_password(validated_data['password'])
@@ -66,16 +79,20 @@ class RegisterSerializer(serializers.ModelSerializer):
 
         return user
 
-class MtnAccountSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = MtnAccount
-        fields = "__all__"
 
-class AgentAccountSerializer(serializers.ModelSerializer):
+class GetAgentAccountSerializer(serializers.ModelSerializer):
+    mtn_account = MtnAccountSerializer(read_only=True)
+    user = UserSerializer(read_only=True)
     class Meta:
         model = AgentAccount
-        fields = "__all__"
+        fields = ('agent_name', 'agent_code', 'mtn_account', 'user')
 
+
+class AgentAccountSerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = AgentAccount
+        fields = ('agent_name', 'agent_code', 'mtn_account', 'user')
 
 class ChangePasswordSerializer(serializers.Serializer):
     model = User
