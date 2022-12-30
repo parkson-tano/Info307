@@ -3,10 +3,12 @@ import React from "react";
 import { useState } from "react";
 import tw from "twrnc";
 import axios from "axios";
-const Register = () => {
+import { NavigationContainer } from "@react-navigation/native";
+const Register = ({ navigation }) => {
   const momo_URL =
     "https://info307-production.up.railway.app/account/register/";
-  const mtn_URL = "https://info307-production.up.railway.app/account/register-mtn/";
+  const mtn_URL =
+    "https://info307-production.up.railway.app/account/register-mtn/";
   const age_URL =
     "https://info307-production.up.railway.app/account/register-agent/";
 
@@ -15,6 +17,7 @@ const Register = () => {
   const [address, setAddress] = useState("");
   const [placeOfBirth, setPlaceOfBirth] = useState("");
   const [idNum, setIdNum] = useState("");
+  const [mtnId, setMtnId] = useState("")
   //   const handleChange = (prop) => (event) => {
   //     setMtnCredentials({ ...mtnCredentials, [prop]: event.target.value });
   //   };
@@ -32,16 +35,19 @@ const Register = () => {
         last_name: lastName,
         front_pic: null,
         rear_pic: null,
-        balance: null,
-        verified: null,
+        balance: 0,
+        verified: true,
       })
       .then((response) => {
         console.log(response.data);
         alert("Success");
+		setMtnId(response.data.id)
+		console.log(mtnId)
+        navigation.navigate("MomoRegister", { mtn_id: response.data.id });
       })
-      .catch((error) => {console.log(error);
-	console.log(firstName);
-console.log(lastName)});
+      .catch((error) => {
+        console.log(error);
+      });
   };
 
   return (
