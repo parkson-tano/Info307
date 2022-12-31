@@ -1,48 +1,22 @@
-import React, { useContext, useState } from "react";
-import { Button, Image, StyleSheet, View } from "react-native";
-import { AuthContext } from "./context/AuthContext";
-import { AxiosContext } from "./context/AxiosContext";
-import Spinner from "./Spinner";
-
+import { View, Text, SafeAreaView } from "react-native";
+import React from 'react'
+import Balance from "./dashboard/Balance";
+import Features from "./dashboard/Features";
 const Dashboard = () => {
-  const axiosContext = useContext(AxiosContext);
-  const authContext = useContext(AuthContext);
-  const [image, setImage] = useState(null);
-  const [status, setStatus] = useState("idle");
-
-
-
-  if (status === "loading") {
-    return <Spinner />;
-  }
-
   return (
-    <View style={styles.container}>
-
-      <View style={styles.buttonGroup}>
-
-        <Button title="Logout" onPress={() => authContext.logout()} />
-      </View>
+    <SafeAreaView>
+          <View>
+      <Text>My Dashboard</Text>
     </View>
-  );
-};
+    <View>
+      <Balance />
+    </View>
+    <View>
+      <Features />
+    </View>
+    </SafeAreaView>
 
-const styles = StyleSheet.create({
-  container: {
-    justifyContent: "center",
-    alignItems: "center",
-    flex: 1,
-  },
-  image: {
-    width: "90%",
-    height: "50%",
-    resizeMode: "contain",
-  },
-  buttonGroup: {
-    marginTop: 20,
-    flexDirection: "row",
-    justifyContent: "space-between",
-    width: "90%",
-  },
-});
-export default Dashboard;
+  )
+}
+
+export default Dashboard

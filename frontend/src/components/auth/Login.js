@@ -16,39 +16,39 @@ import { AuthContext } from "../context/AuthContext";
 import { AxiosContext } from "../context/AxiosContext";
 import * as Keychain from "react-native-keychain";
 import InputField from "../InputField";
+import { useNavigation } from "@react-navigation/native";
 const Login = ({ navigation }) => {
-    const [phone_number, setPhoneNumber] = useState("");
+  const [phone_number, setPhoneNumber] = useState("");
 
-    const [password, setPassword] = useState("");
-    const authContext = useContext(AuthContext);
-    const { publicAxios } = useContext(AxiosContext);
+  const [password, setPassword] = useState("");
+  const authContext = useContext(AuthContext);
+  const { publicAxios } = useContext(AxiosContext);
 
-      const onLogin = async () => {
-        try {
-          const response = await publicAxios.post("/login/", {
-            phone_number: phone_number,
-            password : password,
-          });
+  const onLogin = async () => {
+    try {
+      const response = await publicAxios.post("/login/", {
+        phone_number: phone_number,
+        password: password,
+      });
 
-          const { accessToken, refreshToken } = response.data;
-          authContext.setAuthState({
-            accessToken,
-            refreshToken,
-            authenticated: true,
-          });
+      const { accessToken, refreshToken } = response.data;
+      authContext.setAuthState({
+        accessToken,
+        refreshToken,
+        authenticated: true,
+      });
 
-          await Keychain.setGenericPassword(
-            "token",
-            JSON.stringify({
-              accessToken,
-              refreshToken,
-            })
-          );
-          
-        } catch (error) {
-          Alert.alert("Login Failed", error.response);
-        }
-      };
+      await Keychain.setGenericPassword(
+        "token",
+        JSON.stringify({
+          accessToken,
+          refreshToken,
+        })
+      );
+    } catch (e) {
+      alert("Login Failed");
+    }
+  };
   return (
     <SafeAreaView style={{ flex: 1, justifyContent: "center" }}>
       <View style={{ paddingHorizontal: 25 }}>

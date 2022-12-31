@@ -6,6 +6,7 @@ import { AuthContext } from "../context/AuthContext";
 import * as Keychain from "react-native-keychain";
 import Dashboard from "../Dashboard";
 import Spinner from "../Spinner";
+import DashboardStack from "../navigation/DashboardStacjk";
 const Service = () => {
   const authContext = useContext(AuthContext);
   const [status, setStatus] = useState("loading");
@@ -43,7 +44,7 @@ const Service = () => {
   if (authContext?.authState?.authenticated === false) {
     return <Login />;
   } else {
-    return <Dashboard />;
+    return <DashboardStack />;
   }
 };
 
