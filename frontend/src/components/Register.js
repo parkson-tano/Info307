@@ -1,9 +1,18 @@
-import { View, Text, TextInput, StyleSheet, Button } from "react-native";
+import {
+  SafeAreaView,
+  ScrollView,
+  View,
+  Text,
+  TouchableOpacity,
+} from "react-native";
 import React from "react";
 import { useState } from "react";
 import tw from "twrnc";
 import axios from "axios";
-import { NavigationContainer } from "@react-navigation/native";
+import InputField from "./InputField";
+import DatePicker from "react-native-date-picker";
+import CustomButton from './CustomButton';
+import MaterialIcons from "react-native-vector-icons/MaterialIcons";
 const Register = ({ navigation }) => {
   const momo_URL =
     "https://info307-production.up.railway.app/account/register/";
@@ -18,10 +27,8 @@ const Register = ({ navigation }) => {
   const [placeOfBirth, setPlaceOfBirth] = useState("");
   const [idNum, setIdNum] = useState("");
   const [mtnId, setMtnId] = useState("")
-  //   const handleChange = (prop) => (event) => {
-  //     setMtnCredentials({ ...mtnCredentials, [prop]: event.target.value });
-  //   };
-
+    const [open, setOpen] = useState(false);
+    const [dobLabel, setDobLabel] = useState("Date of Birth");
   const create_mtn = (event) => {
     event.preventDefault();
     axios
@@ -51,59 +58,65 @@ const Register = ({ navigation }) => {
   };
 
   return (
-    <View>
+    <View style={{ flex: 1, justifyContent: "center", paddingHorizontal: 25 }}>
       <Text style={tw.style("text-md", "text-red-500")}>Create an Account</Text>
-      <TextInput
-        style={styles.input}
+      <InputField
+        label={"First Name"}
         value={firstName}
-        onChangeText={(e) => setFirstName(e)}
-        placeholder="First Name"
+        onChange={(e) => setFirstName(e)}
       />
-      <TextInput
-        style={styles.input}
+      <InputField
+        label={"Last Name"}
         value={lastName}
-        onChangeText={(e) => setLastName(e)}
-        placeholder="Last Name"
+        onChange={(e) => setLastName(e)}
       />
-      <TextInput
-        style={styles.input}
-        value={address}
-        onChangeText={(e) => setAddress(e)}
-        placeholder="Address"
-      />
-      <TextInput
-        style={styles.input}
+      <InputField
+        label={"Id Num"}
         value={idNum}
-        onChangeText={(e) => setIdNum(e)}
-        placeholder="ID Number"
+        onChange={(e) => setIdNum(e)}
       />
-      <TextInput
-        style={styles.input}
+      <InputField
+        label={"Address"}
+        value={address}
+        onChange={(e) => setAddress(e)}
+      />
+      <InputField
+        label={"Place of Birth"}
         value={placeOfBirth}
-        onChangeText={(e) => setPlaceOfBirth(e)}
-        placeholder="Place of Birth"
+        onChange={(e) => setPlaceOfBirth(e)}
       />
+      <View
+        style={{
+          flexDirection: "row",
+          borderBottomColor: "#ccc",
+          borderBottomWidth: 1,
+          paddingBottom: 8,
+          marginBottom: 30,
+        }}
+      >
+        <TouchableOpacity onPress={() => setOpen(true)}>
+          <Text style={{ color: "#666", marginLeft: 5, marginTop: 5 }}>
+            {dobLabel}
+          </Text>
+        </TouchableOpacity>
+      </View>
 
-      <Button title="Register" onPress={create_mtn} />
-
-      {/* <TextInput
-        style={styles.input}
-        onChangeText={onChangeTextNumber}
-        value={number}
-        placeholder="useless placeholder"
-        keyboardType="numeric"
-      /> */}
+      <CustomButton label={"Register"} onPress={create_mtn} />
+      <View
+        style={{
+          flexDirection: "row",
+          justifyContent: "center",
+          marginBottom: 30,
+        }}
+      >
+        <Text>Already registered?</Text>
+        <TouchableOpacity onPress={() => navigation.navigate("Login")}>
+          <Text style={{ color: "#AD40AF", fontWeight: "700" }}> Login</Text>
+        </TouchableOpacity>
+      </View>
     </View>
   );
 };
 
-const styles = StyleSheet.create({
-  input: {
-    height: 40,
-    margin: 12,
-    borderWidth: 1,
-    padding: 10,
-  },
-});
 
 export default Register;

@@ -27,7 +27,7 @@ const MomoRegister = ({ route, navigation }) => {
         });
     };
   return (
-    <View>
+    <View style={{ flex: 1, justifyContent: "center", paddingHorizontal: 25 }}>
       <Text>MomoRegister</Text>
       <TextInput
         style={styles.input}
@@ -46,9 +46,7 @@ const MomoRegister = ({ route, navigation }) => {
       <Button title="Register" onPress={create_momo} />
       <Button
         title="Register as Agent"
-        onPress={() =>
-          navigation.navigate("AgentRegister", { mtn_id: mtn_id })
-        }
+        onPress={() => navigation.navigate("AgentRegister", { mtn_id: mtn_id })}
       />
     </View>
   );

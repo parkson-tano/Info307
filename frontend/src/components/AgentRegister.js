@@ -30,14 +30,14 @@ const AgentRegister = ({ route, navigation }) => {
             agent_name: agentName,
             agent_code: agentCode,
             mtn_account: momoAccount,
-            user: userID,
+            user: response.data.id,
           })
           .then((response) => {
             console.log(response.data);
             alert("Success");
           })
           .catch((error) => {
-            console.log(error);
+            console.log(error.response);
           });
       })
       .catch((error) => {
@@ -73,6 +73,7 @@ const AgentRegister = ({ route, navigation }) => {
         value={agentCode}
         onChangeText={(e) => setAgentCode(e)}
         placeholder="Agent Code"
+        keyboardType="numeric"
       />
       <Button title="Register" onPress={create_momo} />
     </View>
