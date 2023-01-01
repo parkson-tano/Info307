@@ -1,6 +1,12 @@
-import { View, Text, TextInput, StyleSheet, Button } from 'react-native'
+import { View, Text, TextInput, StyleSheet, SafeAreaView } from 'react-native'
 import React, { useState } from 'react'
 import axios from "axios";
+import Icon from "react-native-vector-icons/FontAwesome";
+import { Input, Card, Button } from "@rneui/themed";
+import BootstrapStyleSheet from "react-native-bootstrap-styles";
+import { useNavigation } from "@react-navigation/native";
+const bootstrapStyleSheet = new BootstrapStyleSheet();
+const { s, c } = bootstrapStyleSheet;
 const MomoRegister = ({ route, navigation }) => {
   const { mtn_id } = route.params;
         const momo_URL =
@@ -20,35 +26,42 @@ const MomoRegister = ({ route, navigation }) => {
         })
         .then((response) => {
           console.log(response.data);
-          alert("Success");
+          navigation.navigate("Login");
         })
         .catch((error) => {
           console.log(error);
         });
     };
   return (
-    <View style={{ flex: 1, justifyContent: "center", paddingHorizontal: 25 }}>
-      <Text>MomoRegister</Text>
-      <TextInput
-        style={styles.input}
-        value={phoneNumber}
-        onChangeText={(e) => setPhoneNumber(e)}
-        placeholder="Phone Number"
-        keyboardType="numeric"
-      />
-      <TextInput
-        style={styles.input}
-        value={password}
-        onChangeText={(e) => setPassword(e)}
-        placeholder="Password"
-        keyboardType="numeric"
-      />
-      <Button title="Register" onPress={create_momo} />
-      <Button
-        title="Register as Agent"
-        onPress={() => navigation.navigate("AgentRegister", { mtn_id: mtn_id })}
-      />
-    </View>
+    <SafeAreaView>
+      <View style={[s.container]}>
+        <Card>
+          <Card.Title>Momo Registration</Card.Title>
+          <Card.Divider />
+         <TextInput
+          style={styles.input}
+          value={phoneNumber}
+          onChangeText={(e) => setPhoneNumber(e)}
+          placeholder="Phone Number"
+          keyboardType="numeric"
+        />
+        <TextInput
+          style={styles.input}
+          value={password}
+          onChangeText={(e) => setPassword(e)}
+          placeholder="Password"
+          keyboardType="numeric"
+        />
+        <Button title="Register" onPress={create_momo} />
+        <Button
+          title="Register as Agent"
+          onPress={() =>
+            navigation.navigate("AgentRegister", { mtn_id: mtn_id })
+          }
+        /> 
+        </Card>
+      </View>
+    </SafeAreaView>
   );
 };
 const styles = StyleSheet.create({

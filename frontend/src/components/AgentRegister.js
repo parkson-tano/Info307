@@ -1,6 +1,12 @@
-import { View, Text, TextInput, StyleSheet, Button } from "react-native";
+import { View, Text, TextInput, StyleSheet, SafeAreaView } from "react-native";
 import React, { useState } from "react";
 import axios from "axios";
+import Icon from "react-native-vector-icons/FontAwesome";
+import { Input, Card, Button } from "@rneui/themed";
+import BootstrapStyleSheet from "react-native-bootstrap-styles";
+import { useNavigation } from "@react-navigation/native";
+const bootstrapStyleSheet = new BootstrapStyleSheet();
+const { s, c } = bootstrapStyleSheet;
 const AgentRegister = ({ route, navigation }) => {
   const { mtn_id } = route.params;
   const momo_URL =
@@ -34,7 +40,7 @@ const AgentRegister = ({ route, navigation }) => {
           })
           .then((response) => {
             console.log(response.data);
-            alert("Success");
+             navigation.navigate("Login");
           })
           .catch((error) => {
             console.log(error.response);
@@ -46,37 +52,43 @@ const AgentRegister = ({ route, navigation }) => {
   };
 
   return (
-    <View>
-      <Text>AgentRegister</Text>
-      <TextInput
-        style={styles.input}
-        value={phoneNumber}
-        onChangeText={(e) => setPhoneNumber(e)}
-        placeholder="Phone Number"
-        keyboardType="numeric"
-      />
-      <TextInput
-        style={styles.input}
-        value={password}
-        onChangeText={(e) => setPassword(e)}
-        placeholder="Password"
-        keyboardType="numeric"
-      />
-      <TextInput
-        style={styles.input}
-        value={agentName}
-        onChangeText={(e) => setAgentName(e)}
-        placeholder="Agent Name"
-      />
-      <TextInput
-        style={styles.input}
-        value={agentCode}
-        onChangeText={(e) => setAgentCode(e)}
-        placeholder="Agent Code"
-        keyboardType="numeric"
-      />
-      <Button title="Register" onPress={create_momo} />
-    </View>
+    <SafeAreaView>
+      <View style={[s.container]}>
+        <Card>
+          <Card.Title>Agent Registration</Card.Title>
+          <Card.Divider />
+          <TextInput
+          style={styles.input}
+          value={phoneNumber}
+          onChangeText={(e) => setPhoneNumber(e)}
+          placeholder="Phone Number"
+          keyboardType="numeric"
+        />
+        <TextInput
+          style={styles.input}
+          value={password}
+          onChangeText={(e) => setPassword(e)}
+          placeholder="Password"
+          keyboardType="numeric"
+        />
+        <TextInput
+          style={styles.input}
+          value={agentName}
+          onChangeText={(e) => setAgentName(e)}
+          placeholder="Agent Name"
+        />
+        <TextInput
+          style={styles.input}
+          value={agentCode}
+          onChangeText={(e) => setAgentCode(e)}
+          placeholder="Agent Code"
+          keyboardType="numeric"
+        />
+        <Button title="Register" onPress={create_momo} />
+        </Card>
+        
+      </View>
+    </SafeAreaView>
   );
 };
 const styles = StyleSheet.create({
