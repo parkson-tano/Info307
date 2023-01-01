@@ -16,8 +16,7 @@ const Balance = () => {
       <Card>
         <Card.Title>XAF 450,00</Card.Title>
         <Card.Divider />
-
-        <View style={[s.container]}>
+        <View>
           <View style={styles.container}>
             <View style={styles.item1}>
               <Text

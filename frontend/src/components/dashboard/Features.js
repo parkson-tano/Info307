@@ -12,9 +12,6 @@ const { s, c } = bootstrapStyleSheet;
 const Features = () => {
   return (
     <SafeAreaView>
-      <View>
-        <Text>My Service</Text>
-      </View>
       <Card>
         <Card.Title>My Service</Card.Title>
         <Card.Divider />

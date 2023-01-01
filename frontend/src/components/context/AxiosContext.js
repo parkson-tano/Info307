@@ -33,7 +33,7 @@ const AxiosProvider = ({children}) => {
 
   const refreshAuthLogic = failedRequest => {
     const data = {
-      refreshToken: authContext.authState.refresh,
+      refresh: authContext.authState.refresh,
     };
 
     const options = {
@@ -49,14 +49,14 @@ const AxiosProvider = ({children}) => {
 
         authContext.setAuthState({
           ...authContext.authState,
-          accessToken: tokenRefreshResponse.data.access,
+          access: tokenRefreshResponse.data.access,
         });
 
         await Keychain.setGenericPassword(
           'token',
           JSON.stringify({
-            accessToken: tokenRefreshResponse.data.access,
-            refreshToken: authContext.authState.refresh,
+            access: tokenRefreshResponse.data.access,
+            refresh: authContext.authState.refresh,
           }),
         );
 
@@ -64,8 +64,8 @@ const AxiosProvider = ({children}) => {
       })
       .catch(e => {
         authContext.setAuthState({
-          accessToken: null,
-          refreshToken: null,
+          access: null,
+          refresh: null,
         });
       });
   };

@@ -31,10 +31,10 @@ const Login = ({ navigation }) => {
         password: password,
       });
 
-      const { accessToken, refreshToken } = response.data;
+      const { access, refresh } = response.data;
       authContext.setAuthState({
-        accessToken,
-        refreshToken,
+        access,
+        refresh,
         authenticated: true,
       });
 

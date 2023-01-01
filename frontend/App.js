@@ -20,7 +20,7 @@ function App() {
       <AxiosProvider>
         <NavigationContainer initialRouteName="Home">
   
-         <DashboardStack />
+         <Service />
 
         </NavigationContainer>
       </AxiosProvider>

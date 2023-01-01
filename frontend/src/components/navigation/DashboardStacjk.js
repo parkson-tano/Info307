@@ -15,13 +15,15 @@ import AgentRegister from "../AgentRegister";
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import RegisterStack from "./RegisterStack";
 import FundTransfer from "../FundTransfer";
+import Profile from "../Profile";
 const Stack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();
+
 function HomeTabs() {
   return (
     <Tab.Navigator>
-      <Tab.Screen name="Home" component={DashboardStack} />
-      <Tab.Screen name="Account" component={RegisterStack} />
+      <Tab.Screen name="Feed" component={Dashboard} />
+      <Tab.Screen name="Profile" component={Profile} />
     </Tab.Navigator>
   );
 }
@@ -29,7 +31,11 @@ function HomeTabs() {
 const DashboardStack = () => {
   return (
     <Stack.Navigator>
-      <Stack.Screen name="Home" component={HomeTabs} />
+      <Stack.Screen
+        name="Home"
+        component={HomeTabs}
+        options={{ headerShown: false }}
+      />
       <Stack.Screen name="Transaction" component={Transaction} />
       <Stack.Screen name="Transfer" component={Transaction} />
       <Stack.Screen name="Withdraw" component={Withdrawal} />

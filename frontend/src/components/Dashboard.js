@@ -5,9 +5,6 @@ import Features from "./dashboard/Features";
 const Dashboard = () => {
   return (
     <SafeAreaView>
-          <View>
-      <Text>My Dashboard</Text>
-    </View>
     <View>
       <Balance />
     </View>
@@ -15,7 +12,6 @@ const Dashboard = () => {
       <Features />
     </View>
     </SafeAreaView>
-
   )
 }
 
