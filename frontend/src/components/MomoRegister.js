@@ -52,7 +52,8 @@ const MomoRegister = ({ route, navigation }) => {
           placeholder="Password"
           keyboardType="numeric"
         />
-        <Button title="Register" onPress={create_momo} />
+
+        <Button title="Register" onPress={create_momo}  style={{marginBottom:10 }}/>
         <Button
           title="Register as Agent"
           onPress={() =>

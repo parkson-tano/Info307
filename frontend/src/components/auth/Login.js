@@ -1,4 +1,5 @@
 import React, { useContext, useState } from "react";
+import DatePicker, { getFormatedDate } from "react-native-modern-datepicker";
 import {
   View,
   Text,
