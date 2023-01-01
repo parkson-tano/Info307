@@ -46,7 +46,7 @@ const Login = ({ navigation }) => {
         })
       );
     } catch (e) {
-      alert("Login Failed");
+      alert("Invalid Credentials");
     }
   };
   return (
@@ -54,7 +54,6 @@ const Login = ({ navigation }) => {
       <View style={{ paddingHorizontal: 25 }}>
         <Text
           style={{
-            fontFamily: "Roboto-Medium",
             fontSize: 28,
             fontWeight: "500",
             color: "#333",

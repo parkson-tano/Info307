@@ -12,7 +12,7 @@ const { s, c } = bootstrapStyleSheet;
 const Withdraw = () => {
     const navigation = useNavigation();
     const fxn = () => {
-      navigation.navigate("Withdraw");
+      navigation.navigate("FundWithdraw");
     };
   return (
     <View>

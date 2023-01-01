@@ -10,10 +10,10 @@ const Stack = createNativeStackNavigator();
 const RegisterStack = () => {
   return (
     <Stack.Navigator screenOptions={{ headerShown: false }}>
+      <Stack.Screen name="Login" component={Login} />
       <Stack.Screen name="Register" component={Register} />
       <Stack.Screen name="MomoRegister" component={MomoRegister} />
       <Stack.Screen name="AgentRegister" component={AgentRegister} />
-      <Stack.Screen name="Login" component={Login} />
     </Stack.Navigator>
   );
 }

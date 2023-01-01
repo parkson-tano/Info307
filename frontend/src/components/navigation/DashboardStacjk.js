@@ -13,15 +13,15 @@ import Login from "../auth/Login";
 import MomoRegister from "../MomoRegister";
 import AgentRegister from "../AgentRegister";
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-
-
+import RegisterStack from "./RegisterStack";
+import FundTransfer from "../FundTransfer";
 const Stack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();
 function HomeTabs() {
   return (
     <Tab.Navigator>
-      <Tab.Screen name="Home" component={Dashboard} />
-      <Tab.Screen name="Account" component={Register} />
+      <Tab.Screen name="Home" component={DashboardStack} />
+      <Tab.Screen name="Account" component={RegisterStack} />
     </Tab.Navigator>
   );
 }
@@ -35,10 +35,8 @@ const DashboardStack = () => {
       <Stack.Screen name="Withdraw" component={Withdrawal} />
       <Stack.Screen name="TopSelf" component={TopSelf} />
       <Stack.Screen name="TopOther" component={TopOther} />
-      <Stack.Screen name="Register" component={Register} />
-      <Stack.Screen name="MomoRegister" component={MomoRegister} />
-      <Stack.Screen name="AgentRegister" component={AgentRegister} />
-      <Stack.Screen name="Login" component={Login} />
+      <Stack.Screen name="FundTransfer" component={FundTransfer} />
+      <Stack.Screen name="FundWithdraw" component={Withdrawal} />
     </Stack.Navigator>
   );
 };

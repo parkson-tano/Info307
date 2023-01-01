@@ -9,7 +9,7 @@ import { AuthProvider } from "./src/components/context/AuthContext";
 import { AxiosProvider } from "./src/components/context/AxiosContext";
 import DashboardStack from "./src/components/navigation/DashboardStacjk";
 import MyTabs from "./src/components/MyTabs";
-
+import Dashboard from "./src/components/Dashboard";
 
 const Stack = createNativeStackNavigator();
 
@@ -20,7 +20,7 @@ function App() {
       <AxiosProvider>
         <NavigationContainer initialRouteName="Home">
   
-          <Service/>
+         <DashboardStack />
 
         </NavigationContainer>
       </AxiosProvider>

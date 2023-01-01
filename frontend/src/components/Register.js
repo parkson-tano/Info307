@@ -59,7 +59,7 @@ const Register = ({ navigation }) => {
 
   return (
     <View style={{ flex: 1, justifyContent: "center", paddingHorizontal: 25 }}>
-      <Text style={tw.style("text-md", "text-red-500")}>Create an Account</Text>
+      <Text style={tw.style("text-red-500")}>Create an Account</Text>
       <InputField
         label={"First Name"}
         value={firstName}
