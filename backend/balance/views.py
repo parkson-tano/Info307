@@ -86,7 +86,7 @@ def history(request, number):
 
 @api_view(['GET', 'PATCH'])
 def search(request, number):
-    mtn_account = User.objects.filter(phone_number = number)
+    mtn_account = User.objects.get(phone_number = number)
     user_serializer = GetUserSerializer(
             mtn_account, context={'request': request})
     return Response(user_serializer.data)
