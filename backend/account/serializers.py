@@ -34,7 +34,7 @@ class GetUserSerializer(serializers.ModelSerializer):
     mtn_account = MtnAccountSerializer(read_only=True)
     class Meta:
         model = User
-        fields = ('id', 'password', 'phone_number','mtn_account', 'first_name', 'last_name', 'momo_agent', 'date_created', )
+        fields = ('id', 'phone_number','mtn_account', 'first_name', 'last_name', 'momo_agent', 'date_created', )
 
 
 class UserSerializer(serializers.ModelSerializer):
