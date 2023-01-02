@@ -17,21 +17,38 @@ const wait = (timeout) => {
 
 const Balance = () => {
   const navigation = useNavigation();
-  const fxn = () => {
-   navigation.navigate("Transaction");
-  }
+
   const user = jwt_decode(AuthContext._currentValue.authState.access);
-  console.log("user:", user.user_id)
+  console.log("user:", user)
   const [balance, setBalance] = useState('')
+  const [transaction, setTransaction] = useState('')
   // const user_URL = `https://info307-production.up.railway.app/account/{user.id}`;
   const balance_info = `https://info307-production.up.railway.app/accountbalance/${user.user_id}`
-
+  const last_transact = `https://info307-production.up.railway.app/history/${user.phone_number}`;
+  const fxn = () => {
+    navigation.navigate("Transaction", { phone_number: user.phone_number });
+  };
 useEffect(() => {
   axios
     .get(balance_info)
     .then((response) => {
       setBalance(response.data);
     
+    })
+    .catch((error) => console.log(error));
+}, []);
+
+useEffect(() => {
+  axios
+    .get(last_transact)
+    .then((response) => {
+      let len = response.data
+      if (len.length > 0) {
+              const las = parseInt(len.length) - 1;
+      setTransaction(response.data[las]);
+      }
+      
+
     })
     .catch((error) => console.log(error));
 }, []);
@@ -50,12 +67,15 @@ useEffect(() => {
         let response = await fetch(
           balance_info
         );
+        let fet_transact = await fetch(last_transact);
+        let trans_response = await fet_transact.json()
         let responseJson = await response.json();
-        console.log(responseJson.balance);
+        // console.log(responseJson.balance);
         setBalance(responseJson)
+        setTransaction(trans_response[trans_response.length - 1])
         setRefreshing(false);
       } catch (error) {
-        console.error(error);
+        // console.error(error);
       }
     } else {
       setRefreshing(false);
@@ -127,12 +147,16 @@ useEffect(() => {
                 <Text
                   style={{ fontWeight: "bold", marginBottom: 10, fontSize: 17 }}
                 >
-                  {"Deposit"}
+                  {transaction
+                    ? transaction.type_transact.toUpperCase()
+                    : "*****"}
                 </Text>
                 <Text
                   style={{ marginBottom: 10, textAlign: "left", fontSize: 17 }}
                 >
-                  {"674128573"}
+                  {transaction
+                    ? transaction.type_transact.toUpperCase()
+                    : "*****"}
                 </Text>
               </View>
               <View style={{ width: "40%" }}>
@@ -144,12 +168,14 @@ useEffect(() => {
                     fontSize: 17,
                   }}
                 >
-                  {"-2444"}XAF
+                  {transaction ? transaction.amount : "*****"} XAF
                 </Text>
                 <Text
                   style={{ marginBottom: 10, textAlign: "right", fontSize: 17 }}
                 >
-                  {"4:34PM"}
+                  {transaction
+                    ? transaction.date_created.slice(11, 16)
+                    : "*****"}
                 </Text>
               </View>
             </View>

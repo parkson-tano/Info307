@@ -32,4 +32,5 @@ urlpatterns = [
         'delete': 'destroy'
     })),
     path('history/<number>', history),
+    path('search/<number>', search),
 ]

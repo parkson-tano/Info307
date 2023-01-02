@@ -34,7 +34,7 @@ class GetUserSerializer(serializers.ModelSerializer):
     mtn_account = MtnAccountSerializer(read_only=True)
     class Meta:
         model = User
-        fields = ('id', 'password', 'phone_number','mtn_account', 'momo_agent', 'date_created', )
+        fields = ('id', 'password', 'phone_number','mtn_account', 'first_name', 'last_name', 'momo_agent', 'date_created', )
 
 
 class UserSerializer(serializers.ModelSerializer):
@@ -42,7 +42,7 @@ class UserSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
         fields = ('id', 'password', 'phone_number',
-                  'mtn_account','momo_agent', 'date_created', )
+                  'mtn_account', 'momo_agent', 'first_name', 'last_name', 'date_created', )
 
 class RegisterSerializer(serializers.ModelSerializer):
     phone_number = serializers.CharField(
@@ -56,7 +56,7 @@ class RegisterSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
         fields = ('password', 'phone_number',
-                  'mtn_account', 'id', "momo_agent")
+                  'mtn_account', 'id', 'first_name', 'last_name', "momo_agent")
         extra_kwargs = {
             'first_name': {'required': False},
             'last_name': {'required': False}

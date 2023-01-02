@@ -9,6 +9,7 @@ from rest_framework.decorators import api_view
 from rest_framework import generics
 #  your views here.
 
+
 class AccountBalanceViewAPI(viewsets.ModelViewSet):
     queryset = AccountBalance.objects.all()
     serializer_class = AccountBalanceSerializer
@@ -58,6 +59,7 @@ class GetAirtimeViewAPI(viewsets.ModelViewSet):
     queryset = Airtime.objects.all()
     serializer_class = GetAirtimeSerializer
 
+    
 
 @api_view(['GET'])
 def history(request, number):
@@ -82,3 +84,12 @@ def history(request, number):
     return Response(data)
 
 
+@api_view(['GET'])
+def search(request, number):
+    mtn_account = User.objects.get(phone_number = number)
+
+
+    user_serializer = GetUserSerializer(
+        mtn_account, context={'request': request})
+
+    return Response(user_serializer.data)
