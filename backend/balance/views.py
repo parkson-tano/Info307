@@ -34,6 +34,31 @@ class AirtimeViewAPI(viewsets.ModelViewSet):
     serializer_class = AirtimeSerializer
 
 
+class GetAccountBalanceViewAPI(viewsets.ModelViewSet):
+    queryset = AccountBalance.objects.all()
+    serializer_class = AccountBalanceSerializer
+
+
+class GetDepositViewAPI(viewsets.ModelViewSet):
+    queryset = Deposit.objects.all()
+    serializer_class = GetDepositSerializer
+
+
+class GetWithdrawViewAPI(viewsets.ModelViewSet):
+    queryset = Withdraw.objects.all()
+    serializer_class = GetWithdrawSerializer
+
+
+class GetTransferViewAPI(viewsets.ModelViewSet):
+    queryset = Transfer.objects.all()
+    serializer_class = GetTransferSerializer
+
+
+class GetAirtimeViewAPI(viewsets.ModelViewSet):
+    queryset = Airtime.objects.all()
+    serializer_class = GetAirtimeSerializer
+
+
 @api_view(['GET'])
 def history(request, number):
     deposit = Deposit.objects.filter(
@@ -44,13 +69,13 @@ def history(request, number):
     airtime = Airtime.objects.filter(
         Q(user__phone_number=number) | Q(number=number))
     
-    deposit_serializer = DepositSerializer(
+    deposit_serializer = GetDepositSerializer(
         deposit, many=True, context={'request': request})
-    withdraw_serializer = WithdrawSerializer(
+    withdraw_serializer = GetWithdrawSerializer(
         withdraw, many=True, context={'request': request})
-    transfer_serializer = TransferSerializer(
+    transfer_serializer = GetTransferSerializer(
         transfer, many=True, context={'request': request})
-    airtime_serializer = AirtimeSerializer(
+    airtime_serializer = GetAirtimeSerializer(
     airtime, many=True, context={'request': request})
     data = deposit_serializer.data + withdraw_serializer.data + \
         transfer_serializer.data + airtime_serializer.data
