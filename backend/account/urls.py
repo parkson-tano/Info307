@@ -7,6 +7,9 @@ from rest_framework_simplejwt.views import (
 )
 urlpatterns = [
     path("", GetUserViewAPI.as_view({'get': 'list'}), name='user_create'),
+    path("get/<int:pk>", GetUserViewAPI.as_view({'get': 'retrieve',
+                                          'patch': 'partial_update',
+                                          'delete': 'destroy'}), name='user_api'),
     path("<int:pk>", UserViewAPI.as_view({'get': 'retrieve', 'put': 'update',
                                           'patch': 'partial_update',
                                           'delete': 'destroy'}), name='user_api'),

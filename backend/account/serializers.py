@@ -6,6 +6,7 @@ from django.contrib.auth.password_validation import validate_password
 from .models import AgentAccount, MtnAccount
 from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
 from django.contrib.auth import get_user_model
+
 User = get_user_model()
 
 
@@ -33,7 +34,7 @@ class GetUserSerializer(serializers.ModelSerializer):
     mtn_account = MtnAccountSerializer(read_only=True)
     class Meta:
         model = User
-        fields = ('id', 'password', 'phone_number','mtn_account', 'date_created', )
+        fields = ('id', 'password', 'phone_number','mtn_account', 'momo_agent', 'date_created', )
 
 
 class UserSerializer(serializers.ModelSerializer):
