@@ -4,18 +4,26 @@ import { Card, ListItem, Button, Icon, Text } from "@rneui/themed";
 import BootstrapStyleSheet from 'react-native-bootstrap-styles';
 import { useNavigation } from "@react-navigation/native";
 import { AuthContext } from '../context/AuthContext';
+import axios from 'axios';
 import { AuthProvider } from '../context/AuthContext';
+import jwt_decode from "jwt-decode";
 const bootstrapStyleSheet = new BootstrapStyleSheet();
 const { s, c } = bootstrapStyleSheet;
+
 
 const Balance = () => {
   const navigation = useNavigation();
   const fxn = () => {
    navigation.navigate("Transaction");
   }
+  const user = jwt_decode(AuthContext._currentValue.authState.access);
+  const user_URL = `https://info307-production.up.railway.app/account/{user.id}`;
+  const user_info = ""
+
   console.log("Auth:", AuthContext)
     console.log("Provider:", AuthContext._currentValue.authState.access);
         console.log("Provider:", AuthContext._currentValue.authState.refresh);
+        console.log(user);
   return (
     <View>
       <Card containerStyle={{borderRadius:15, padding:20}}>
