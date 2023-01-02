@@ -5,6 +5,7 @@ urlpatterns = [
                                                          'post': 'create'})),
     path("accountbalance/<int:pk>", GetAccountBalanceViewAPI.as_view({
         'get': 'retrieve',
+        'patch': 'partial_update',
         'delete': 'destroy'
     })),
     path("deposit", DepositViewAPI.as_view({'get': 'list',
