@@ -1,7 +1,7 @@
-import * as React from "react";
-import { Button, View, Text, SafeAreaView } from "react-native";
+import React, { useState } from "react";
+import { Button, View, Text, SafeAreaView, RefreshControl } from "react-native";
 import { NavigationContainer } from "@react-navigation/native";
-import { createNativeStackNavigator } from "@react-navigation/native-stack"
+import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import RegisterStack from "./src/components/navigation/RegisterStack";
 import { AppRegistry } from "react-native";
 import Service from "./src/components/auth/Services";
@@ -13,16 +13,14 @@ import Dashboard from "./src/components/Dashboard";
 
 const Stack = createNativeStackNavigator();
 
-
 function App() {
+
   return (
     <AuthProvider>
       <AxiosProvider>
         <NavigationContainer initialRouteName="Home">
-  
-         <Service />
-         {/* <DashboardStack /> */}
-
+          <Service />
+          {/* <DashboardStack /> */}
         </NavigationContainer>
       </AxiosProvider>
     </AuthProvider>
