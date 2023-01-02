@@ -6,13 +6,13 @@ import {
   StyleSheet,
   SafeAreaView,
   TextInput,
-  Button,
   Alert,
   TouchableOpacity,
+  ActivityIndicator,
 } from "react-native";
 import MaterialIcons from "react-native-vector-icons/MaterialIcons";
 import LoginSVG from "../../../assets/images/login.svg";
-import CustomButton from "../CustomButton";
+import { Input, Card, Button } from "@rneui/themed";
 import { AuthContext } from "../context/AuthContext";
 import { AxiosContext } from "../context/AxiosContext";
 import * as Keychain from "react-native-keychain";
@@ -70,7 +70,6 @@ const Login = ({ navigation }) => {
           value={phone_number}
           onChange={(e) => setPhoneNumber(e)}
         />
-
         <InputField
           label={"PIN"}
           inputType="password"
@@ -81,7 +80,11 @@ const Login = ({ navigation }) => {
           onChange={(e) => setPassword(e)}
         />
 
-        <CustomButton label={"Login"} onPress={() => onLogin()} />
+        <Button
+          title="Login"
+          onPress={() => onLogin()}
+          style={{ marginBottom: 10 }}
+        />
         <View
           style={{
             flexDirection: "row",

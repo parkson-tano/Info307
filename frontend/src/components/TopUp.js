@@ -46,7 +46,6 @@ const TopUp = () => {
               icon={<Icon name="arrow-right" size={15} color="white" />}
               title="For My Number"
               onPress={() => navigation.navigate("TopSelf")}
-
             />
           </View>
           <View>
@@ -58,7 +57,11 @@ const TopUp = () => {
           </View>
         </View>
       </RBSheet>
-      <Text>Top Up</Text>
+      <Text
+        style={{ textAlign: "center", fontWeight: "bold", marginVertical: 5 }}
+      >
+        Top Up Credit
+      </Text>
     </View>
   );
 }

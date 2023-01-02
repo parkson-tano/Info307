@@ -20,8 +20,16 @@ const AgentRegister = ({ route, navigation }) => {
   const [agentName, setAgentName] = useState("");
   const [agentCode, setAgentCode] = useState("");
   const [mtnAccount, SetMtnAccount] = useState(mtn_id);
+  const [submitting, SetSubmitting] = useState(false);
+  const [btn, setBtn] = useState(false);
+  const [phoneError, SetPhoneError] = useState(false);
+  const isSubmitting = () => {
+    SetSubmitting(true);
+    setBtn(true);
+  };
   const create_momo = (event) => {
     event.preventDefault();
+    isSubmitting()
     axios
       .post(momo_URL, {
         password: password,
@@ -44,13 +52,21 @@ const AgentRegister = ({ route, navigation }) => {
           })
           .catch((error) => {
             console.log(error.response);
+                    alert(error.response.data.phone_number);
+                    SetSubmitting(false);
+                    setBtn(false);
+                    SetPhoneError(true);
           });
       })
       .catch((error) => {
         console.log(error);
       });
   };
-
+  const handleSubmit = () => {
+    if (password.length != 5) {
+      alert("Enter a 5 digit PIN");
+    }
+  };
   return (
     <SafeAreaView>
       <View style={[s.container]}>
@@ -58,35 +74,47 @@ const AgentRegister = ({ route, navigation }) => {
           <Card.Title>Agent Registration</Card.Title>
           <Card.Divider />
           <TextInput
-          style={styles.input}
-          value={phoneNumber}
-          onChangeText={(e) => setPhoneNumber(e)}
-          placeholder="Phone Number"
-          keyboardType="numeric"
-        />
-        <TextInput
-          style={styles.input}
-          value={password}
-          onChangeText={(e) => setPassword(e)}
-          placeholder="Password"
-          keyboardType="numeric"
-        />
-        <TextInput
-          style={styles.input}
-          value={agentName}
-          onChangeText={(e) => setAgentName(e)}
-          placeholder="Agent Name"
-        />
-        <TextInput
-          style={styles.input}
-          value={agentCode}
-          onChangeText={(e) => setAgentCode(e)}
-          placeholder="Agent Code"
-          keyboardType="numeric"
-        />
-        <Button title="Register" onPress={create_momo} />
+            style={styles.input}
+            value={phoneNumber}
+            onChangeText={(e) => setPhoneNumber(e)}
+            placeholder="Phone Number"
+            keyboardType="numeric"
+          />
+          {phoneError && (
+            <Text style={{ color: "red" }}>Phone Number Must be Unique</Text>
+          )}
+          <TextInput
+            style={styles.input}
+            value={password}
+            onChangeText={(e) => setPassword(e)}
+            placeholder="Password"
+            keyboardType="numeric"
+          />
+          <TextInput
+            style={styles.input}
+            value={agentName}
+            onChangeText={(e) => setAgentName(e)}
+            placeholder="Agent Name"
+          />
+          <TextInput
+            style={styles.input}
+            value={agentCode}
+            onChangeText={(e) => setAgentCode(e)}
+            placeholder="Agent Code"
+            keyboardType="numeric"
+          />
+          {submitting && (
+            <ActivityIndicator
+              size="large"
+              color="#0066CC"
+              style={{ padding: 10 }}
+            />
+          )}
+          <Button
+            title="Register"
+            onPress={password.length != 5 ? handleSubmit : create_momo}
+          />
         </Card>
-        
       </View>
     </SafeAreaView>
   );

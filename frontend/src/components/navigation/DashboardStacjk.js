@@ -22,7 +22,7 @@ const Tab = createBottomTabNavigator();
 function HomeTabs() {
   return (
     <Tab.Navigator>
-      <Tab.Screen name="Feed" component={Dashboard} />
+      <Tab.Screen name="Home" component={Dashboard} />
       <Tab.Screen name="Profile" component={Profile} />
     </Tab.Navigator>
   );
@@ -32,12 +32,12 @@ const DashboardStack = () => {
   return (
     <Stack.Navigator>
       <Stack.Screen
-        name="Home"
+        name="Feed"
         component={HomeTabs}
         options={{ headerShown: false }}
       />
       <Stack.Screen name="Transaction" component={Transaction} />
-      <Stack.Screen name="Transfer" component={Transaction} />
+      <Stack.Screen name="Transfer" component={Transfer} />
       <Stack.Screen name="Withdraw" component={Withdrawal} />
       <Stack.Screen name="TopSelf" component={TopSelf} />
       <Stack.Screen name="TopOther" component={TopOther} />

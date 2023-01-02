@@ -1,8 +1,10 @@
-import { View, Text, StyleSheet } from 'react-native'
+import { View, StyleSheet } from 'react-native'
 import React from 'react'
-import { Card, ListItem, Button, Icon } from "react-native-elements";
+import { Card, ListItem, Button, Icon, Text } from "@rneui/themed";
 import BootstrapStyleSheet from 'react-native-bootstrap-styles';
 import { useNavigation } from "@react-navigation/native";
+import { AuthContext } from '../context/AuthContext';
+import { AuthProvider } from '../context/AuthContext';
 const bootstrapStyleSheet = new BootstrapStyleSheet();
 const { s, c } = bootstrapStyleSheet;
 
@@ -11,9 +13,12 @@ const Balance = () => {
   const fxn = () => {
    navigation.navigate("Transaction");
   }
+  console.log("Auth:", AuthContext)
+    console.log("Provider:", AuthContext._currentValue.authState.access);
+        console.log("Provider:", AuthContext._currentValue.authState.refresh);
   return (
-    <View style={[s.container]}>
-      <Card>
+    <View>
+      <Card containerStyle={{borderRadius:15, padding:20}}>
         <Card.Title>XAF 450,00</Card.Title>
         <Card.Divider />
         <View>
@@ -21,9 +26,9 @@ const Balance = () => {
             <View style={styles.item1}>
               <Text
                 style={{
-                  fontSize: 25,
+                  fontSize: 18,
                   fontWeight: "bold",
-                  marginBottom: 5,
+                  marginBottom: 0,
                 }}
               >
                 Last Transaction
@@ -35,23 +40,54 @@ const Balance = () => {
                   borderRadius: 0,
                   marginLeft: 0,
                   marginRight: 0,
-                  marginBottom: 0,
+                  marginBottom: 5,
                 }}
-                title="See More"
                 type="clear"
                 onPress={fxn}
-              />
+              >
+                <Text
+                  style={{ color: "orange", fontSize: 20, fontWeight: "bold" }}
+                >
+                  See More
+                </Text>
+
+                <Icon name="chevron-right" color="orange" />
+              </Button>
             </View>
           </View>
 
           <View style={styles.container}>
-            <View style={styles.item1}>
-              <Text style={[s.text, s.h3, s.textPrimary]}>{"Deposit"}</Text>
-              <Text style={[s.text, s.h5, s.textPrimary]}>{"674128573"}</Text>
+            <View style={{ width: "20%" }}>
+              <Icon type="evilicon" name="user" color="purple" raised reverse />
             </View>
-            <View style={styles.item2}>
-              <Text style={[s.text, s.h5]}>{"-2444"}XAF</Text>
-              <Text style={[s.text, s.h5]}>{"4:34PM"}</Text>
+            <View style={{ width: "40%" }}>
+              <Text
+                style={{ fontWeight: "bold", marginBottom: 10, fontSize: 17 }}
+              >
+                {"Deposit"}
+              </Text>
+              <Text
+                style={{ marginBottom: 10, textAlign: "left", fontSize: 17 }}
+              >
+                {"674128573"}
+              </Text>
+            </View>
+            <View style={{ width: "40%" }}>
+              <Text
+                style={{
+                  fontWeight: "bold",
+                  marginBottom: 10,
+                  textAlign: "right",
+                  fontSize: 17,
+                }}
+              >
+                {"-2444"}XAF
+              </Text>
+              <Text
+                style={{ marginBottom: 10, textAlign: "right", fontSize: 17 }}
+              >
+                {"4:34PM"}
+              </Text>
             </View>
           </View>
         </View>
@@ -67,12 +103,12 @@ const styles = StyleSheet.create({
     alignItems: "flex-start", // if you want to fill rows left to right
   },
   item1: {
-    width: "70%",
+    width: "60%",
     marginVertical: 10,
     // is 50% of container width
   },
   item2: {
-    width: "30%",
+    width: "40%",
     marginVertical: 10,
     // is 50% of container width
   },
