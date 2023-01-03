@@ -84,12 +84,10 @@ def history(request, number):
     return Response(data)
 
 
-@api_view(['GET'])
+@api_view(['GET', 'PATCH'])
 def search(request, number):
     mtn_account = User.objects.get(phone_number = number)
-
-
     user_serializer = GetUserSerializer(
-        mtn_account, context={'request': request})
-
+            mtn_account, context={'request': request})
     return Response(user_serializer.data)
+
