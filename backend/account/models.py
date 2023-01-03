@@ -45,11 +45,11 @@ class AgentAccount(models.Model):
     mtn_account = models.OneToOneField(
         MtnAccount, on_delete=models.CASCADE, null=True, blank=True)
     agent_name = models.CharField(max_length=256, null=True, blank=True)
-    agent_code = models.IntegerField(null=True, blank=True, unique=True)
+    agent_code = models.IntegerField(unique=True, primary_key=True)
     date_created = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
-        return str(self.id)
+        return str(self.agent_code)
 
 class AccountBalance(models.Model):
     user = models.OneToOneField(
