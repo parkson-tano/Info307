@@ -40,7 +40,6 @@ class AirtimeSerializer(serializers.ModelSerializer):
 
 
 class GetDepositSerializer(serializers.ModelSerializer):
-    momo_agent = GetAgentAccountSerializer(read_only=True)
     recipient = GetUserSerializer(read_only=True)
     class Meta:
         model = Deposit
@@ -48,7 +47,6 @@ class GetDepositSerializer(serializers.ModelSerializer):
 
 
 class GetWithdrawSerializer(serializers.ModelSerializer):
-    momo_agent = GetAgentAccountSerializer(read_only=True)
     user = GetUserSerializer(read_only=True)
     class Meta:
         model = Withdraw
