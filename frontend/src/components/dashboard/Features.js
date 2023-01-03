@@ -13,7 +13,7 @@ const Features = () => {
   return (
     <SafeAreaView>
       <Card containerStyle={{backgroundColor:"none"}}>
-        <Card.Title style={{textAlign:'left', fontWeight:'bold', fontSize:"20"}}>My Service</Card.Title>
+        <Card.Title style={{textAlign:'left', fontWeight:'bold', fontSize:20}}>My Service</Card.Title>
         <Card.Divider />
 
         <View style={[s.container]}>

@@ -16,7 +16,7 @@ const Profile = () => {
       <Card>
         <Card.Title>My Profile</Card.Title>
         <Card.Divider />
-        {/* <Button title="Logout" onPress={() => authContext.logout()} /> */}
+        <Button title="Logout" onPress={() => authContext.logout()} />
       </Card>
     </View>
   );

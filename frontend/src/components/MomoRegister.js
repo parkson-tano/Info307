@@ -15,7 +15,7 @@ import { useNavigation } from "@react-navigation/native";
 const bootstrapStyleSheet = new BootstrapStyleSheet();
 const { s, c } = bootstrapStyleSheet;
 const MomoRegister = ({ route, navigation }) => {
-  const { mtn_id } = route.params;
+  const { mtn_id, first_name, last_name } = route.params;
   const momo_URL =
     "https://info307-production.up.railway.app/account/register/";
 
@@ -40,6 +40,8 @@ const MomoRegister = ({ route, navigation }) => {
         password: password,
         phone_number: phoneNumber,
         mtn_account: momoAccount,
+        first_name : first_name,
+        last_name : last_name,
       })
       .then((response) => {
         console.log(response.data);

@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useState, createContext } from "react";
 import DatePicker, { getFormatedDate } from "react-native-modern-datepicker";
 import {
   View,
@@ -18,36 +18,36 @@ import { AxiosContext } from "../context/AxiosContext";
 import * as Keychain from "react-native-keychain";
 import InputField from "../InputField";
 import { useNavigation } from "@react-navigation/native";
+var pas = "1232"
+// export const PasswordContext = createContext({ password });
 const Login = ({ navigation }) => {
   const [phone_number, setPhoneNumber] = useState("");
-
   const [password, setPassword] = useState("");
   const authContext = useContext(AuthContext);
   const { publicAxios } = useContext(AxiosContext);
-
   const onLogin = async () => {
     try {
       const response = await publicAxios.post("/login/", {
         phone_number: phone_number,
         password: password,
       });
-
       const { access, refresh } = response.data;
       authContext.setAuthState({
         access,
         refresh,
         authenticated: true,
+        password: password,
       });
 
       await Keychain.setGenericPassword(
         "token",
         JSON.stringify({
-          accessToken,
-          refreshToken,
+          access,
+          refresh,
         })
       );
     } catch (e) {
-      alert("Invalid Credentials");
+      console.log(e);
     }
   };
   return (

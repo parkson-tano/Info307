@@ -1,10 +1,11 @@
 import { View, SafeAreaView, ScrollView, RefreshControl } from "react-native";
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import Balance from "./dashboard/Balance";
 import Features from "./dashboard/Features";
 import { Text } from "@rneui/themed";
-const Dashboard = () => {
-
+import { AuthContext } from "./context/AuthContext";
+const Dashboard = ({route, navigation }) => {
+    const authContext = useContext(AuthContext);
   return (
     <SafeAreaView>
       <View>
