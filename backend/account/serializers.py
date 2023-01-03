@@ -84,7 +84,7 @@ class RegisterSerializer(serializers.ModelSerializer):
 
 class GetAgentAccountSerializer(serializers.ModelSerializer):
     mtn_account = MtnAccountSerializer(read_only=True)
-    user = UserSerializer(read_only=True)
+    user = GetUserSerializer(read_only=True)
     class Meta:
         model = AgentAccount
         fields = ('agent_name', 'agent_code', 'mtn_account', 'user')
