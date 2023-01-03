@@ -17,7 +17,7 @@ urlpatterns = [
                                                             'patch': 'partial_update',
                                                             'delete': 'destroy'})),
     path("agent-account/<int:pk>",
-         AgentAccountViewAPI.as_view({'get': 'retrieve', 'put': 'update',
+         GetAgentAccountViewAPI.as_view({'get': 'retrieve', 'put': 'update',
                                       'patch': 'partial_update',
                                       'delete': 'destroy'})),
     path("mtn-account", MtnAccountViewAPI.as_view({'get': 'list'})),
