@@ -74,6 +74,10 @@ class RegisterSerializer(serializers.ModelSerializer):
         user = User.objects.create(
             phone_number=validated_data['phone_number'],   
             mtn_account = validated_data['mtn_account'],    
+            momo_agent=validated_data['momo_agent'],
+            first_name=validated_data['first_name'],
+            last_name = validated_data['last_name'], 
+
         )
 
         user.set_password(validated_data['password'])
