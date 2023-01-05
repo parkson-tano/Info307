@@ -18,7 +18,7 @@ export default function InputField({
         borderBottomColor: "#ccc",
         borderBottomWidth: 1,
         paddingBottom: 8,
-        marginBottom: 25,
+        marginBottom: 20
       }}
     >
       {icon}
@@ -40,6 +40,9 @@ export default function InputField({
           style={{ flex: 1, paddingVertical: 0 }}
         />
       )}
+      {/* {!value && (
+        <Text style={{ color: "red" }}>Fill this field</Text>
+      )} */}
       <TouchableOpacity onPress={fieldButtonFunction}>
         <Text style={{ color: "#AD40AF", fontWeight: "700" }}>
           {fieldButtonLabel}

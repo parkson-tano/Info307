@@ -1,18 +1,35 @@
-import { View, Text, SafeAreaView } from "react-native";
-import React from 'react'
+import { View, SafeAreaView, ScrollView, RefreshControl } from "react-native";
+import React, { useState, useContext } from "react";
 import Balance from "./dashboard/Balance";
 import Features from "./dashboard/Features";
-const Dashboard = () => {
+import { Text } from "@rneui/themed";
+import { AuthContext } from "./context/AuthContext";
+const Dashboard = ({route, navigation }) => {
+    const authContext = useContext(AuthContext);
   return (
     <SafeAreaView>
-    <View>
-      <Balance />
-    </View>
-    <View>
-      <Features />
-    </View>
+      <View>
+        <Text
+          h4
+          style={{
+            paddingHorizontal: 10,
+            fontWeight: "bold",
+            margin: 10,
+            backgroundColor: "white",
+            width: "100%",
+          }}
+        >
+          Main Account
+        </Text>
+      </View>
+      <View>
+        <Balance />
+      </View>
+      <View>
+        <Features />
+      </View>
     </SafeAreaView>
-  )
+  );
 }
 
 export default Dashboard

@@ -12,8 +12,8 @@ const { s, c } = bootstrapStyleSheet;
 const Features = () => {
   return (
     <SafeAreaView>
-      <Card>
-        <Card.Title>My Service</Card.Title>
+      <Card containerStyle={{backgroundColor:"none"}}>
+        <Card.Title style={{textAlign:'left', fontWeight:'bold', fontSize:20}}>My Service</Card.Title>
         <Card.Divider />
 
         <View style={[s.container]}>

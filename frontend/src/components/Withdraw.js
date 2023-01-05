@@ -23,7 +23,11 @@ const Withdraw = () => {
         style={{ width: 200, height: 100 }}
         onPress={fxn}
       />
-      <Text>Withdraw</Text>
+      <Text
+        style={{ textAlign: "center", fontWeight: "bold", marginVertical: 5 }}
+      >
+        Withdraw Money
+      </Text>
     </View>
   );
 };

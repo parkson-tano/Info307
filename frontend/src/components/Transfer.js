@@ -18,7 +18,7 @@ const Transfer = () => {
         style={{ width: 200, height: 100 }}
         onPress={() => navigation.navigate("FundTransfer")}
       />
-      <Text>Transfer</Text>
+      <Text style={{textAlign:'center', fontWeight:"bold", marginVertical:5}}>Transfer Money</Text>
     </View>
   );
 };

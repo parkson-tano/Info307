@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useState, createContext } from "react";
 import DatePicker, { getFormatedDate } from "react-native-modern-datepicker";
 import {
   View,
@@ -6,48 +6,48 @@ import {
   StyleSheet,
   SafeAreaView,
   TextInput,
-  Button,
   Alert,
   TouchableOpacity,
+  ActivityIndicator,
 } from "react-native";
 import MaterialIcons from "react-native-vector-icons/MaterialIcons";
 import LoginSVG from "../../../assets/images/login.svg";
-import CustomButton from "../CustomButton";
+import { Input, Card, Button } from "@rneui/themed";
 import { AuthContext } from "../context/AuthContext";
 import { AxiosContext } from "../context/AxiosContext";
 import * as Keychain from "react-native-keychain";
 import InputField from "../InputField";
 import { useNavigation } from "@react-navigation/native";
+var pas = "1232"
+// export const PasswordContext = createContext({ password });
 const Login = ({ navigation }) => {
   const [phone_number, setPhoneNumber] = useState("");
-
   const [password, setPassword] = useState("");
   const authContext = useContext(AuthContext);
   const { publicAxios } = useContext(AxiosContext);
-
   const onLogin = async () => {
     try {
       const response = await publicAxios.post("/login/", {
         phone_number: phone_number,
         password: password,
       });
-
       const { access, refresh } = response.data;
       authContext.setAuthState({
         access,
         refresh,
         authenticated: true,
+        password: password,
       });
 
       await Keychain.setGenericPassword(
         "token",
         JSON.stringify({
-          accessToken,
-          refreshToken,
+          access,
+          refresh,
         })
       );
     } catch (e) {
-      alert("Invalid Credentials");
+      console.log(e);
     }
   };
   return (
@@ -70,7 +70,6 @@ const Login = ({ navigation }) => {
           value={phone_number}
           onChange={(e) => setPhoneNumber(e)}
         />
-
         <InputField
           label={"PIN"}
           inputType="password"
@@ -81,7 +80,11 @@ const Login = ({ navigation }) => {
           onChange={(e) => setPassword(e)}
         />
 
-        <CustomButton label={"Login"} onPress={() => onLogin()} />
+        <Button
+          title="Login"
+          onPress={() => onLogin()}
+          style={{ marginBottom: 10 }}
+        />
         <View
           style={{
             flexDirection: "row",

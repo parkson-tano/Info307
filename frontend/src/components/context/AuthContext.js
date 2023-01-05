@@ -3,20 +3,21 @@ import * as Keychain from "react-native-keychain";
 
 const AuthContext = createContext(null);
 const { Provider } = AuthContext;
-
 const AuthProvider = ({ children }) => {
   const [authState, setAuthState] = useState({
     access: null,
     refresh: null,
     authenticated: null,
+    password: null,
   });
 
-  const logout = async () => {
-    await Keychain.resetGenericPassword();
+  const logout = () => {
+    // await Keychain.resetGenericPassword();
     setAuthState({
       access: null,
       refresh: null,
       authenticated: false,
+      password: null,
     });
   };
 

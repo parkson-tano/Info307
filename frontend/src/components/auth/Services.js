@@ -8,6 +8,8 @@ import Dashboard from "../Dashboard";
 import Spinner from "../Spinner";
 import DashboardStack from "../navigation/DashboardStacjk";
 import RegisterStack from "../navigation/RegisterStack";
+
+
 const Service = () => {
   const authContext = useContext(AuthContext);
   const [status, setStatus] = useState("loading");
@@ -16,7 +18,6 @@ const Service = () => {
     try {
       const value = await Keychain.getGenericPassword();
       const jwt = JSON.parse(value.password);
-
       authContext.setAuthState({
         access: jwt.access || null,
         refresh: jwt.refresh || null,
