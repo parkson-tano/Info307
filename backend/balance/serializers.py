@@ -11,6 +11,10 @@ class AccountBalanceSerializer(serializers.ModelSerializer):
         model = AccountBalance
         fields = "__all__"
 
+class BalanceSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = AccountBalance
+        fields = "__all__"
 
 class BalanceSerializer(serializers.ModelSerializer):
     class Meta:
@@ -61,7 +65,6 @@ class GetWithdrawSerializer(serializers.ModelSerializer):
 class GetTransferSerializer(serializers.ModelSerializer):
     receiver = GetUserSerializer(read_only=True)
     sender = GetUserSerializer(read_only=True)
-
     class Meta:
         model = Transfer
         fields = "__all__"

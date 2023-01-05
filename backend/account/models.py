@@ -57,7 +57,6 @@ class AgentAccount(models.Model):
     def __str__(self):
         return self.agent_code
 
-
 class AccountBalance(models.Model):
     user = models.OneToOneField(
         User, on_delete=models.CASCADE, related_name='user_account')

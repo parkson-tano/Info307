@@ -70,7 +70,6 @@ def history(request, number):
         Q(sender__phone_number=number) | Q(receiver__phone_number=number))
     airtime = Airtime.objects.filter(
         Q(user__phone_number=number) | Q(number=number))
-
     deposit_serializer = GetDepositSerializer(
         deposit, many=True, context={'request': request})
     withdraw_serializer = GetWithdrawSerializer(
@@ -79,6 +78,7 @@ def history(request, number):
         transfer, many=True, context={'request': request})
     airtime_serializer = GetAirtimeSerializer(
         airtime, many=True, context={'request': request})
+
     data = deposit_serializer.data + withdraw_serializer.data + \
         transfer_serializer.data + airtime_serializer.data
     return Response(data)
@@ -90,3 +90,4 @@ def search(request, number):
     user_serializer = GetUserSerializer(
         mtn_account, context={'request': request})
     return Response(user_serializer.data)
+

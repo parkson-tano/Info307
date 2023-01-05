@@ -42,6 +42,11 @@ const MomoRegister = ({ route, navigation }) => {
         password: password,
         phone_number: phoneNumber,
         mtn_account: momoAccount,
+<<<<<<< HEAD
+=======
+        first_name : firstName,
+        last_name : lastName,
+>>>>>>> 2cdb86647658d34e68b6d499b239c4837ca1d45f
       })
       .then((response) => {
         console.log(response.data);
