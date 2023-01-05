@@ -11,8 +11,8 @@ const AuthProvider = ({ children }) => {
     password: null,
   });
 
-  const logout = async () => {
-    await Keychain.resetGenericPassword();
+  const logout = () => {
+    // await Keychain.resetGenericPassword();
     setAuthState({
       access: null,
       refresh: null,

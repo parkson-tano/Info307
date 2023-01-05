@@ -1,4 +1,4 @@
-import { View, Text, TextInput, StyleSheet, SafeAreaView } from "react-native";
+import { View, Text, TextInput, StyleSheet, SafeAreaView, ActivityIndicator } from "react-native";
 import React, { useState } from "react";
 import axios from "axios";
 import Icon from "react-native-vector-icons/FontAwesome";
@@ -22,6 +22,7 @@ const AgentRegister = ({ route, navigation }) => {
   const [mtnAccount, SetMtnAccount] = useState(mtn_id);
   const [submitting, SetSubmitting] = useState(false);
   const [btn, setBtn] = useState(false);
+  const [agent, setAgent] = useState(true)
   const [phoneError, SetPhoneError] = useState(false);
   const isSubmitting = () => {
     SetSubmitting(true);
@@ -35,6 +36,8 @@ const AgentRegister = ({ route, navigation }) => {
         password: password,
         phone_number: phoneNumber,
         mtn_account: momoAccount,
+        momo_agent : true,
+        
       })
       .then((response) => {
         console.log(response.data);
@@ -59,7 +62,7 @@ const AgentRegister = ({ route, navigation }) => {
           });
       })
       .catch((error) => {
-        console.log(error);
+        console.log(error.response);
       });
   };
   const handleSubmit = () => {
