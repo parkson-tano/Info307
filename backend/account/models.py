@@ -29,7 +29,7 @@ class MtnAccount(models.Model):
 class User(AbstractUser):
     username = models.CharField(max_length=50, blank=True, null=True, unique=False, default="")
     mtn_account = models.OneToOneField(MtnAccount, on_delete=models.CASCADE, null=True, blank=True)
-    momo_agent = models.BooleanField(default=False)
+    momo_agent = models.CharField(max_length=10, null = True, blank = True)
     phone_number = models.CharField(_('phone number'), unique=True, max_length=15)
     date_created = models.DateTimeField(auto_now_add=True)
     USERNAME_FIELD = 'phone_number'
