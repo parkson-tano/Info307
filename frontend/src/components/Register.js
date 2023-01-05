@@ -113,7 +113,7 @@ const Register = ({ navigation }) => {
         setMtnId(response.data.id);
         console.log(mtnId);
 
-        navigation.navigate("MomoRegister", { mtn_id: response.data.id, first_name : response.date.first_name, last_name :response.data.last_name });
+        navigation.navigate("MomoRegister", { mtn_id: response.data.id, first_name : response.data.first_name, last_name :response.data.last_name });
       })
       .catch((error) => {
         console.log(error);

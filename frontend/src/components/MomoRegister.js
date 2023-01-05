@@ -22,6 +22,8 @@ const MomoRegister = ({ route, navigation }) => {
   const [phoneNumber, setPhoneNumber] = useState("");
   const [password, setPassword] = useState("");
   const [momoAccount, SetMomoAccount] = useState(mtn_id);
+    const [firstName, setFirstName] = useState(first_name);
+      const [lastName, setLastName] = useState(last_name);
   const [phoneError, SetPhoneError]  =useState(false)
   const [submitting, SetSubmitting] = useState(false)
     const [btn, setBtn] = useState(false);
@@ -40,8 +42,8 @@ const MomoRegister = ({ route, navigation }) => {
         password: password,
         phone_number: phoneNumber,
         mtn_account: momoAccount,
-        first_name : first_name,
-        last_name : last_name,
+        first_name : firstName,
+        last_name : lastName,
       })
       .then((response) => {
         console.log(response.data);
