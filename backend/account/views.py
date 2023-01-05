@@ -30,6 +30,7 @@ class GetUserViewAPI(viewsets.ModelViewSet):
     queryset = User.objects.all()
     serializer_class = GetUserSerializer
 
+
 class RegisterView(viewsets.ModelViewSet):
     queryset = User.objects.all()
     serializer_class = RegisterSerializer
@@ -48,6 +49,7 @@ class AgentAccountViewAPI(viewsets.ModelViewSet):
 class GetAgentAccountViewAPI(viewsets.ModelViewSet):
     queryset = AgentAccount.objects.all()
     serializer_class = GetAgentAccountSerializer
+
 
 class LogoutAndBlacklistRefreshToken(APIView):
     permission_classes = (permissions.AllowAny,)
@@ -69,7 +71,7 @@ class ChangePasswordView(generics.UpdateAPIView):
 
     def get_object(self, queryset=None):
         id = self.kwargs['number']
-        obj = User.objects.get(phone_number = id)
+        obj = User.objects.get(phone_number=id)
         return obj
 
     def update(self, request, *args, **kwargs):
@@ -81,11 +83,11 @@ class ChangePasswordView(generics.UpdateAPIView):
             self.object.set_password(serializer.data.get("new_password"))
             self.object.save()
             response = {
-                    'status': 'success',
-                    'code': status.HTTP_200_OK,
-                    'message': 'Password updated successfully',
-                    'data': []
-                }
+                'status': 'success',
+                'code': status.HTTP_200_OK,
+                'message': 'Password updated successfully',
+                'data': []
+            }
 
             return Response(response)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)

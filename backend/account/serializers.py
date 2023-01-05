@@ -6,6 +6,7 @@ from django.contrib.auth.password_validation import validate_password
 from .models import AgentAccount, MtnAccount
 from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
 from django.contrib.auth import get_user_model
+
 User = get_user_model()
 
 
@@ -33,7 +34,7 @@ class GetUserSerializer(serializers.ModelSerializer):
     mtn_account = MtnAccountSerializer(read_only=True)
     class Meta:
         model = User
-        fields = ('id', 'password', 'phone_number','mtn_account', 'date_created', )
+        fields = ('id', 'phone_number', 'password','mtn_account', 'first_name', 'last_name', 'momo_agent', 'date_created', )
 
 
 class UserSerializer(serializers.ModelSerializer):
@@ -41,7 +42,7 @@ class UserSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
         fields = ('id', 'password', 'phone_number',
-                  'mtn_account', 'date_created', )
+                  'mtn_account', 'momo_agent', 'first_name', 'last_name', 'date_created', )
 
 class RegisterSerializer(serializers.ModelSerializer):
     phone_number = serializers.CharField(
@@ -54,7 +55,8 @@ class RegisterSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = User
-        fields = ('password', 'phone_number','mtn_account', 'id' )
+        fields = ('password', 'phone_number',
+                  'mtn_account', 'id', 'first_name', 'last_name', "momo_agent")
         extra_kwargs = {
             'first_name': {'required': False},
             'last_name': {'required': False}
@@ -72,6 +74,7 @@ class RegisterSerializer(serializers.ModelSerializer):
         user = User.objects.create(
             phone_number=validated_data['phone_number'],   
             mtn_account = validated_data['mtn_account'],    
+            momo_agent=validated_data['momo_agent'],
         )
 
         user.set_password(validated_data['password'])
@@ -82,7 +85,7 @@ class RegisterSerializer(serializers.ModelSerializer):
 
 class GetAgentAccountSerializer(serializers.ModelSerializer):
     mtn_account = MtnAccountSerializer(read_only=True)
-    user = UserSerializer(read_only=True)
+    user = GetUserSerializer(read_only=True)
     class Meta:
         model = AgentAccount
         fields = ('agent_name', 'agent_code', 'mtn_account', 'user')

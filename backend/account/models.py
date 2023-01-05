@@ -23,41 +23,48 @@ class MtnAccount(models.Model):
 
     verified = models.BooleanField(default=False)
     date_created = models.DateTimeField(auto_now_add=True)
+
     def __str__(self):
         return str(self.id)
 
+
 class User(AbstractUser):
-    username = models.CharField(max_length=50, blank=True, null=True, unique=False, default="")
-    mtn_account = models.OneToOneField(MtnAccount, on_delete=models.CASCADE, null=True, blank=True)
+    username = models.CharField(
+        max_length=50, blank=True, null=True, unique=False, default="")
+    mtn_account = models.OneToOneField(
+        MtnAccount, on_delete=models.CASCADE, null=True, blank=True)
     momo_agent = models.BooleanField(default=False)
-    phone_number = models.CharField(_('phone number'), unique=True, max_length=15)
+    phone_number = models.CharField(
+        _('phone number'), unique=True, max_length=15)
     date_created = models.DateTimeField(auto_now_add=True)
     USERNAME_FIELD = 'phone_number'
     REQUIRED_FIELDS = ['first_name', 'last_name', 'username']
-    
+
     def __str__(self):
-        return "{}".format(self.phone_number)
+        return self.phone_number
 
 
 class AgentAccount(models.Model):
+    agent_code = models.IntegerField(unique=True, primary_key=True)
     user = models.OneToOneField(
         User, on_delete=models.CASCADE, related_name='agent_account')
     mtn_account = models.OneToOneField(
         MtnAccount, on_delete=models.CASCADE, null=True, blank=True)
     agent_name = models.CharField(max_length=256, null=True, blank=True)
-    agent_code = models.IntegerField(null=True, blank=True, unique=True)
+
     date_created = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
-        return str(self.id)
+        return self.agent_code
+
 
 class AccountBalance(models.Model):
     user = models.OneToOneField(
         User, on_delete=models.CASCADE, related_name='user_account')
     balance = models.FloatField(default=0)
 
+
 @receiver(post_save, sender=User)
 def create_profile(sender, instance, created, **kwargs):
     if created:
         AccountBalance.objects.create(user=instance)
-

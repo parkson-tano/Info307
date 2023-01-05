@@ -3,43 +3,35 @@ from .views import *
 urlpatterns = [
     path("accountbalance", AccountBalanceViewAPI.as_view({'get': 'list',
                                                          'post': 'create'})),
-    path("accountbalance/<int:pk>", AccountBalanceViewAPI.as_view({
+    path("accountbalance/<int:pk>", GetAccountBalanceViewAPI.as_view({
         'get': 'retrieve',
-        'put': 'update',
         'patch': 'partial_update',
         'delete': 'destroy'
     })),
     path("deposit", DepositViewAPI.as_view({'get': 'list',
                                            'post': 'create'})),
-    path("deposit/<int:pk>/", DepositViewAPI.as_view({
+    path("deposit/<int:pk>/", GetDepositViewAPI.as_view({
         'get': 'retrieve',
-        'put': 'update',
-        'patch': 'partial_update',
         'delete': 'destroy'
     })),
     path("withdraw", WithdrawViewAPI.as_view({'get': 'list',
                                              'post': 'create'})),
-    path("withdraw/<int:pk>", WithdrawViewAPI.as_view({
+    path("withdraw/<int:pk>", GetWithdrawViewAPI.as_view({
         'get': 'retrieve',
-        'put': 'update',
-        'patch': 'partial_update',
         'delete': 'destroy'
     })),
     path("airtime", AirtimeViewAPI.as_view({'get': 'list',
                                            'post': 'create'})),
-    path("airtime/<int:pk>/", AirtimeViewAPI.as_view({
+    path("airtime/<int:pk>/", GetAirtimeViewAPI.as_view({
         'get': 'retrieve',
-        'put': 'update',
-        'patch': 'partial_update',
         'delete': 'destroy'
     })),
     path("transfer", TransferViewAPI.as_view({'get': 'list',
                                              'post': 'create'})),
-    path("transfer/<int:pk>/", TransferViewAPI.as_view({
+    path("transfer/<int:pk>/", GetTransferViewAPI.as_view({
         'get': 'retrieve',
-        'put': 'update',
-        'patch': 'partial_update',
         'delete': 'destroy'
     })),
     path('history/<number>', history),
+    path('search/<number>', search),
 ]
