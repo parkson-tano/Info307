@@ -41,7 +41,7 @@ class User(AbstractUser):
     REQUIRED_FIELDS = ['first_name', 'last_name', 'username']
 
     def __str__(self):
-        return self.phone_number
+        return str(self.phone_number)
 
 
 class AgentAccount(models.Model):
@@ -55,7 +55,7 @@ class AgentAccount(models.Model):
     date_created = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
-        return self.agent_code
+        return str(elf.agent_code)
 
 class AccountBalance(models.Model):
     user = models.OneToOneField(
