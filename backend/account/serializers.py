@@ -56,7 +56,7 @@ class RegisterSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
         fields = ('password', 'phone_number',
-                  'mtn_account', 'id', 'first_name', 'last_name', "momo_agent")
+                  'mtn_account', 'id', "momo_agent")
         extra_kwargs = {
             'first_name': {'required': False},
             'last_name': {'required': False},
@@ -76,8 +76,6 @@ class RegisterSerializer(serializers.ModelSerializer):
             phone_number=validated_data['phone_number'],   
             mtn_account = validated_data['mtn_account'],    
             momo_agent=validated_data['momo_agent'],
-            first_name = validated_data['first_name'],
-            last_name = validated_data['last_name'],
         )
 
         user.set_password(validated_data['password'])
