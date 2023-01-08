@@ -29,7 +29,12 @@ class MtnAccountSerializer(serializers.ModelSerializer):
         model = MtnAccount
         fields = "__all__"
 
+class AgentAccountSerializer(serializers.ModelSerializer):
 
+    class Meta:
+        model = AgentAccount
+        fields = ('agent_name', 'agent_code', 'mtn_account', 'user')
+        
 class GetUserSerializer(serializers.ModelSerializer):
     mtn_account = MtnAccountSerializer(read_only=True)
     agent_account = AgentAccountSerializer(read_only = True)
@@ -93,11 +98,7 @@ class GetAgentAccountSerializer(serializers.ModelSerializer):
         fields = ('agent_name', 'agent_code', 'mtn_account', 'user')
 
 
-class AgentAccountSerializer(serializers.ModelSerializer):
 
-    class Meta:
-        model = AgentAccount
-        fields = ('agent_name', 'agent_code', 'mtn_account', 'user')
 
 class ChangePasswordSerializer(serializers.Serializer):
     model = User
