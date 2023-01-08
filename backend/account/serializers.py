@@ -34,13 +34,13 @@ class AgentAccountSerializer(serializers.ModelSerializer):
     class Meta:
         model = AgentAccount
         fields = ('agent_name', 'agent_code', 'mtn_account', 'user')
-        
+
 class GetUserSerializer(serializers.ModelSerializer):
     mtn_account = MtnAccountSerializer(read_only=True)
     agent_account = AgentAccountSerializer(read_only = True)
     class Meta:
         model = User
-        fields = ('id', 'phone_number', 'password','mtn_account', 'first_name', 'last_name', 'momo_agent', 'date_created', )
+        fields = ('id', 'phone_number', 'password','mtn_account', 'first_name', 'last_name', 'momo_agent', "agent_account", 'date_created', )
 
 
 class UserSerializer(serializers.ModelSerializer):
