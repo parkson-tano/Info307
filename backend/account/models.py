@@ -55,7 +55,7 @@ class AgentAccount(models.Model):
     date_created = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
-        return str(elf.agent_code)
+        return str(self.agent_code)
 
 class AccountBalance(models.Model):
     user = models.OneToOneField(
