@@ -88,7 +88,7 @@ class GetAgentAccountSerializer(serializers.ModelSerializer):
     user = GetUserSerializer(read_only=True)
     class Meta:
         model = AgentAccount
-        fields = ('agent_name', "id", 'agent_code', 'mtn_account', 'user')
+        fields = ('agent_name', 'agent_code', 'mtn_account', 'user')
 
 
 class AgentAccountSerializer(serializers.ModelSerializer):
