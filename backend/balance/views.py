@@ -63,9 +63,9 @@ class GetAirtimeViewAPI(viewsets.ModelViewSet):
 @api_view(['GET'])
 def history(request, number):
     deposit = Deposit.objects.filter(
-        Q(recipient__phone_number=number) | Q(momo_agent__phone_number=number))
+        Q(recipient__phone_number=number) | Q(momo_agent__user__phone_number=number))
     withdraw = Withdraw.objects.filter(
-        Q(user__phone_number=number) | Q(momo_agent__phone_number=number))
+        Q(user__phone_number=number) | Q(momo_agent__user__phone_number=number))
     transfer = Transfer.objects.filter(
         Q(sender__phone_number=number) | Q(receiver__phone_number=number))
     airtime = Airtime.objects.filter(
