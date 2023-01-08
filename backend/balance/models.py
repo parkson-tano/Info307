@@ -1,12 +1,12 @@
 from django.db import models
-from account.models import User
+from account.models import User, AgentAccount
 
 # Create your models here.
 
 
 class Deposit(models.Model):
     momo_agent = models.ForeignKey(
-        User, on_delete=models.PROTECT, related_name='user_agent')
+        AgentAccount, on_delete=models.PROTECT, related_name='user_agent')
     recipient = models.ForeignKey(
         User, on_delete=models.PROTECT, related_name='user_receive')
     amount = models.IntegerField(default=0)
@@ -28,7 +28,7 @@ class Transfer(models.Model):
 
 class Withdraw(models.Model):
     momo_agent = models.ForeignKey(
-        User, on_delete=models.PROTECT, related_name='user_momo_agent')
+        AgentAccount, on_delete=models.PROTECT, related_name='user_momo_agent')
     user = models.ForeignKey(
         User, on_delete=models.PROTECT, related_name='user_withdraw')
     amount = models.IntegerField(default=0)
